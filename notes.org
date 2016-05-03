@@ -1,0 +1,39 @@
+* Checkers History
+1951 - Starchey writes the first AI for checkers
+1959 - Samuel Publishes "Some Studies in Machine Learning Using the game of Checkers", invents alpha-beta pruning
+1989 - Schaeffer makes chinook
+1994 - Chinook beats the world human champion Lafferty
+1997 - Jonathan Schaeffer writes a book about Chinook called One Jump Ahead: Challenging Human Supremacy in Checkers.[3] An updated version of the book was published November 2008.
+May 24, 2003 - Chinook completes its 10 piece database with 5 pieces on each side.
+August 2, 2004 - The Chinook team announces that the tournament opening in English draughts called the White Doctor (10–14 22–18 12–16) is proven to be a draw.
+July 19, 2007 - The journal Science publishes Schaeffer's team's article "Checkers Is Solved", presenting their proof that the best a player playing against Chinook can achieve is a draw.
+* Chess History
+1956 - John McCarthy conference on Artificial Intelligence
+1959 - Kotok, first program to play chess written by McCarthy
+1978 - Several automated players (Belle, Chess4.7) start beating masters
+1989 - Kasparov Competes against Deep Thought (And wins)
+1996 - Deep Blue Beats Kasparov for one game, but loses tournament
+2003 - Junior Ties Kasparov
+2005 - Hydra (Custom hardware) wins 5.5 - 0.5 against grand master
+2009 - Commodity hardware performs at grand master levels
+* Go History
+1968 - Zorbist studies go and pattern recognition in his thesis
+1981 - Go players for home computers are available, and awful
+1987 - Monte Carlo Tree Search applied to games, no one takes it seriously
+1992 - MCTS used in Go for the first time
+1998 - Go Intellect loses to children with a 25-30 stone handicap
+2006 - Upper Confidence Bounds for Trees published, used in MoGo
+2008 - MoGo is Dan in 9x9 go
+2012 - Zen wins 3:1 on a 19x19 board
+2015 - Alpha Go wins without a handicap against professional players
+2016 - Alpha Go beats a 9-dan player
+* Other domains in which computers beat humans
+Holdem (weakly solved in 2015)
+Crosswords (2006)
+Rock Paper Scissors
+Backgammon (1979)
+Connect 4 (Solved in 1988)
+Othello(Solved 1993)
+Mancala (Solved 2002)
+
+
