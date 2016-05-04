@@ -2,9 +2,11 @@
 %.eps : %.svg
 	inkscape $^ -E $@ --export-ignore-filters
 
-%.pdf : %.tex
+%.dvi : %.tex
 	latex $^
 	latex $^
+
+%.pdf : %.dvi
 	dvipdf $^
 
 all: presentation
