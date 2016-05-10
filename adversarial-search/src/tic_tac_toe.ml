@@ -30,7 +30,7 @@ let initState = {
 }
 
 let nextPlayer = function
-  | Blank -> failwith "Only give me X or O."
+  | Blank -> Blank
   | Cross -> Naught
   | Naught -> Cross
 
@@ -46,7 +46,7 @@ let toInt = function
   | Naught -> ~-1
 
 let rowToString r =
-  Printf.sprintf " %c | %c | %c " r.(0) r.(1) r.(2)
+  Printf.sprintf " %c | %c | %c " (toChar r.(0)) (toChar r.(1)) (toChar r.(2))
 
 let boardToString b =
   Printf.sprintf "%s\n%s\n%s\n"
@@ -129,7 +129,9 @@ let intToInd i =
 
 let applyMove b m =
   let (x,y) = intToInd m.ind in
-  if (List.mem m.ind b.remaining) && b.board.(x).(y) = Blank then begin
+  let rem = List.mem m.ind b.remaining
+  and blank = b.board.(y).(x) = Blank in
+  if rem && blank  then begin
     let next_board = Array.make_matrix 3 3 Blank in
     for x = 0 to maxBoardInd do
       for y = 0 to maxBoardInd do
@@ -143,11 +145,11 @@ let applyMove b m =
       board = next_board;
     }
   end
-  else failwith (Printf.sprintf "Illegal move to %i %i by %c!" x y (toChar m.player))
+  else failwith (Printf.sprintf "Illegal move to %i -> (%i, %i) by %c! rem: %b blank: %b" m.ind x y (toChar m.player) rem blank)
 
 let undoMove b m =
   let (x,y) = intToInd m.ind in
-  if not (List.mem m.ind b.remaining) && not (b.board.(x).(y) = Blank) then begin
+  if not (List.mem m.ind b.remaining) && not (b.board.(y).(x) = Blank) then begin
     let next_board = Array.make_matrix 3 3 Blank in
     for x = 0 to maxBoardInd do
       for y = 0 to maxBoardInd do
@@ -162,3 +164,30 @@ let undoMove b m =
     }
   end
   else failwith (Printf.sprintf "Illegal undo move to %i %i by %c!" x y (toChar m.player))
+
+
+let maxMove board =
+  let sum = ref 0 in
+  for x = 0 to maxBoardInd do
+    for y = 0 to maxBoardInd do
+      sum := toInt (board.(y).(x))
+    done;
+  done;
+  if !sum > 0 then Cross
+  else if !sum < 0 then Naught
+  else Blank
+
+let canonicalBoard board =
+  let maxMover = maxMove board in
+  match maxMover with
+  | Cross
+  | Blank -> board
+  | Naught -> begin
+    let toRet = Array.make_matrix 3 3 Blank in
+    for y = 0 to maxBoardInd do
+      for x = 0 to maxBoardInd do
+        toRet.(y).(x) <- nextPlayer board.(y).(x)
+      done
+    done;
+    toRet
+  end

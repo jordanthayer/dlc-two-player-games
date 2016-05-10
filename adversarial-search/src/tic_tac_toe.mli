@@ -10,7 +10,7 @@ val nextPlayer : space -> space
 
 val toInt : space -> int
 
-val boardToString : char array array -> string
+val boardToString : space array array -> string
 
 val getWinner : space array array -> space
 
@@ -19,3 +19,5 @@ val intToInd : int -> int * int
 
 val applyMove : state -> move -> state
 val undoMove : state -> move -> state
+
+val canonicalBoard : board -> board
