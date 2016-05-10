@@ -10,6 +10,8 @@ type 'a node =
 | Min of 'a
 | Max of 'a
 
+(* the game will provide functions on game states, it doesn't know about minimax's internal
+   representation! *)
 let wrap fn = function
   | Max s
   | Min s -> fn s
