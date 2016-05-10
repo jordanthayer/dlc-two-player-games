@@ -1,4 +1,7 @@
-all: CountStates
+all: CountStates minimax
+
+minimax : tic_tac_toe.ml
+	ocamlbuild minimax.native
 
 CountStates: tic_tac_toe.ml
 	ocamlbuild CountStates.native

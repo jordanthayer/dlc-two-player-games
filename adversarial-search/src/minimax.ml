@@ -20,6 +20,13 @@ type 'a node =
     score : int;
     next : 'a node; }
 
+(* print out the solution minimax found for playing the game *)
+let rec visSolution toString node =
+  Printf.printf "%s\n\n" (toString node.data);
+  if node.next != node then visSolution toString node.next
+
+(* simple implementation of minimax. Note that we don't
+   need to know anything about the game specifically. Just how to get the next move. *)
 let minimax getChildren getValue initState =
   let makeNode cState player =
     let rec ret = { data = cState;
@@ -34,30 +41,33 @@ let minimax getChildren getValue initState =
     | kids ->
       begin
         match List.fold_left (fun accum cState ->
-          let nextNode = makeNode cState node.player in
+          let nextNode = makeNode cState (next node.player) in
+          let nextNode = search nextNode in
           match accum with
           | None -> Some nextNode
           | Some accum ->
-            if node.player = Max && accum.score > nextNode.score
-            then Some accum
-            else if node.player = Max
-            then Some nextNode
-            else if node.player = Min && accum.score < nextNode.score
-            then Some accum
-            else Some nextNode) None kids with
+            begin
+              match node.player with
+              | Max -> if accum.score >= nextNode.score then Some accum else Some nextNode
+              | Min -> if accum.score <= nextNode.score then Some accum else Some nextNode
+            end) None kids with
         | None -> failwith "?"
         | Some best -> { node with score = best.score; next = best; }
       end in
   search (makeNode initState Max)
 
+(* example invocation assuming that we're going to play tic-tac-toe *)
 let main () =
   let istate = Tic_tac_toe.initState in
   let getValue s = Tic_tac_toe.toInt (Tic_tac_toe.getWinner s.Tic_tac_toe.board) in
   let all_legal_moves (board : Tic_tac_toe.state) =
-    List.map (fun i -> { Tic_tac_toe.player = board.Tic_tac_toe.toPlay; Tic_tac_toe.ind = i; }) board.Tic_tac_toe.remaining in
+    if getValue board = 0
+    then List.map (fun i -> { Tic_tac_toe.player = board.Tic_tac_toe.toPlay; Tic_tac_toe.ind = i; }) board.Tic_tac_toe.remaining
+    else [] in
   let getChildren state =
     let nexts = all_legal_moves state in
     List.map (Tic_tac_toe.applyMove state) nexts in
-  minimax getChildren getValue istate
+  let solution = minimax getChildren getValue istate in
+  visSolution (fun s -> Tic_tac_toe.boardToString s.Tic_tac_toe.board) solution
 
-let _ = main
+let _ = main ()
