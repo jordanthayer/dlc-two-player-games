@@ -1,20 +1,108 @@
-* Tic-tac-toe Size
-** Total Board Positions
-   3^9 = 19683
+* Minimax Discussion
+** General Algorithm Structure
+** Computing Solutions Vs. Playing the Game
+** What's a static evaluator
+*** Where would they go?
 
-** Tree search, ignoring wins, duplicates
-   9! = 362880
+** The power of transposition tables
+*** Tic-tac-toe Size
+**** Total Board Positions
+     3^9 = 19683
 
-** Tree search, stopping at wins
-   294778
+**** Tree search, ignoring wins, duplicates
+     9! = 362880
 
-** Tree search paying attention to duplicates
-   294778
-   Note that there's no difference! You have to treat it as a graph to get a speedup
+**** Tree search, stopping at wins
+     294778
 
-** Graph search, paying attention to duplicates
-   120967 trivial duplicate detection (116215 discarded)
-   118942 for rotating 'heaviest' corner to upper left (114753 discarded)
+**** Tree search paying attention to duplicates
+     294778
+     Note that there's no difference! You have to treat it as a graph to get a speedup
 
-** Perfect symmetry reduction
-   138 terminal positions
+**** Graph search, paying attention to duplicates
+     120967 trivial duplicate detection (116215 discarded)
+     118942 for rotating 'heaviest' corner to upper left (114753 discarded)
+
+**** Perfect symmetry reduction
+     138 terminal positions
+
+*** Where do you put them in the code?
+**** Take a look at the state counting code for inspiration
+
+* Example Minimax Run
+~/dlc/dlc-two-player-games/adversarial-search/src $ ./minimax.native 
+   |   |   
+-----------
+   |   |   
+-----------
+   |   |   
+
+
+ X |   |   
+-----------
+   |   |   
+-----------
+   |   |   
+
+
+ X |   |   
+-----------
+   | O |   
+-----------
+   |   |   
+
+
+ X | X |   
+-----------
+   | O |   
+-----------
+   |   |   
+
+
+ X | X | O 
+-----------
+   | O |   
+-----------
+   |   |   
+
+
+ X | X | O 
+-----------
+   | O |   
+-----------
+ X |   |   
+
+
+ X | X | O 
+-----------
+ O | O |   
+-----------
+ X |   |   
+
+
+ X | X | O 
+-----------
+ O | O | X 
+-----------
+ X |   |   
+
+
+ X | X | O 
+-----------
+ O | O | X 
+-----------
+ X | O |   
+
+
+ X | X | O 
+-----------
+ O | O | X 
+-----------
+ X | O | X 
+
+
+ X | X | O 
+-----------
+ O | O | X 
+-----------
+ X | O | X 
