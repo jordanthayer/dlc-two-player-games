@@ -4,8 +4,7 @@
 *)
 
 (** Nodes come in two flavors, depending on who's turn it is to move.
-    Either it's a min move, or a max move.  The 'a just says we aren't
-    committing to the type of the remaining part of the node. *)
+    Either it's a min move, or a max move *)
 type player =
 | Min
 | Max
@@ -16,12 +15,17 @@ let next = function
   | Min -> Max
   | Max -> Min
 
+(**  The 'a just says we aren't
+     committing to the type of the remaining part of the node. *)
 type 'a node = {
   data : 'a;         (* However the game wants to represent the game's state *)
   player : player;   (* Who's turn is it to move? *)
-  score : int;       (* What's the Utility of this Move? *)
+  score : int;       (* What's the utility of this move? *)
   next : 'a node;    (* What's the next move to make in an optimal strategy? *)
   }
+(** Note, I only need next if I want to play the game.
+    If I just want to know who wins in the optimal case, I can
+    save myself a bunch of memory by dropping this field. *)
 
 (** print out the solution minimax found for playing the game *)
 let rec visSolution toString node =
@@ -38,12 +42,13 @@ type 'a valueFun = 'a -> int
 let minimax (getChildren : 'a succFun) (getValue : 'a valueFun) (initState : 'a) =
   (* a local helper function for adding nodes to the minimax tree *)
   let makeNode cState player =
-    (* recursive structure initially.  I am my own next node. *)
+    (* recursive structure initially. I am my own next node. *)
     let rec ret = { data = cState;
                     player = player;
-                    score = 0;
+                    score = 0; (* we set the score to be neutral initially*)
                     next = ret; } in
     ret in
+  (* a local helper function for deciding what node is best in minimax tree search. *)
   let rec bestChild node accum cState =
     let nextPlayer = next node.player in
     let nextNode = search (makeNode cState nextPlayer) in
@@ -51,6 +56,7 @@ let minimax (getChildren : 'a succFun) (getValue : 'a valueFun) (initState : 'a)
     | None -> Some nextNode
     | Some accum ->
       begin
+        (* here's where we have the two modes of operation, one for min, one for max *)
         match node.player with
         | Max -> if accum.score >= nextNode.score then Some accum else Some nextNode
         | Min -> if accum.score <= nextNode.score then Some accum else Some nextNode
