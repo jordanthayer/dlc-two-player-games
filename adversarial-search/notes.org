@@ -1,0 +1,20 @@
+* Tic-tac-toe Size
+** Total Board Positions
+   3^9 = 19683
+
+** Tree search, ignoring wins, duplicates
+   9! = 362880
+
+** Tree search, stopping at wins
+   294778
+
+** Tree search paying attention to duplicates
+   294778
+   Note that there's no difference! You have to treat it as a graph to get a speedup
+
+** Graph search, paying attention to duplicates
+   120967 trivial duplicate detection (116215 discarded)
+   118942 for rotating 'heaviest' corner to upper left (114753 discarded)
+
+** Perfect symmetry reduction
+   138 terminal positions
