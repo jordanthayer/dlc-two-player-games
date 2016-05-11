@@ -2,7 +2,10 @@
 open Tic_tac_toe
 
 let all_legal_moves (board : state) =
-  List.map (fun i -> { player = board.toPlay; ind = i; }) board.remaining
+  match getWinner board.board with
+  | Cross
+  | Naught -> []
+  | Blank -> List.map (fun i -> { player = board.toPlay; ind = i; }) board.remaining
 
 let printState i s = Printf.sprintf "Move %i:\n%s\n" i (boardToString s.board)
 
