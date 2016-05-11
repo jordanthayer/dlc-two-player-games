@@ -49,7 +49,7 @@ let rowToString r =
   Printf.sprintf " %c | %c | %c " (toChar r.(0)) (toChar r.(1)) (toChar r.(2))
 
 let boardToString b =
-  Printf.sprintf "%s\n%s\n%s\n"
+  Printf.sprintf "%s\n-----------\n%s\n-----------\n%s\n"
     (rowToString b.(0))
     (rowToString b.(1))
     (rowToString b.(2))
