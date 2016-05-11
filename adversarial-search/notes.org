@@ -30,6 +30,7 @@
 **** Take a look at the state counting code for inspiration
 
 * Example Minimax Run
+"
 ~/dlc/dlc-two-player-games/adversarial-search/src $ ./minimax.native 
    |   |   
 -----------
@@ -106,3 +107,4 @@
  O | O | X 
 -----------
  X | O | X 
+"
