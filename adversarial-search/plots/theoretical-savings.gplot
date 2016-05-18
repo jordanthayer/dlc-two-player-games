@@ -3,13 +3,12 @@ set style line 1 linecolor rgb '#0060ad lintype 1 linewidth 2
 set style line 2 linecolor rgb '#dd181f lintype 1 linewidth 2
 set style line 3 linecolor rgb '#000000 lintype 1 linewidth 2
 
-avg_bfactor = 2
-minimax(x) = avg_bfactor ** x
-alphabeta(x) = avg_bfactor ** (x / 2)
+minimax(avg_bfactor,x) = avg_bfactor ** x
+alphabeta(avg_bfactor,x) = avg_bfactor ** (x / 2)
 second(x) = 20
 
-logminimax(x) = log(minimax(x))
-logalphabeta(x) = log(alphabeta(x))
+logminimax(b,x) = log(minimax(b,x))
+logalphabeta(b,x) = log(alphabeta(b,x))
 
 set xrange [1:20]
 set xlabel "Game Depth"
@@ -17,32 +16,40 @@ set ylabel "Search Effort (log scale)"
 
 set terminal pdf
 
-avg_bfactor = 2
 set output "b2.pdf"
-plot logminimax(x) title 'Minimax' with lines linestyle 1, \
-     logalphabeta(x) title 'Alpha-Beta' with lines linestyle 2, \
+plot logminimax(2,x) title 'Minimax' with lines linestyle 1, \
+     logalphabeta(2,x) title 'Alpha-Beta' with lines linestyle 2, \
      second(x) notitle
 
-avg_bfactor = 3
 set output "b3.pdf"
-plot logminimax(x) title 'Minimax' with lines linestyle 1, \
-     logalphabeta(x) title 'Alpha-Beta' with lines linestyle 2, \
+plot logminimax(3,x) title 'Minimax' with lines linestyle 1, \
+     logalphabeta(3,x) title 'Alpha-Beta' with lines linestyle 2, \
      second(x) notitle
 
-avg_bfactor = 4
 set output "b4.pdf"
-plot logminimax(x) title 'Minimax' with lines linestyle 1, \
-     logalphabeta(x) title 'Alpha-Beta' with lines linestyle 2, \
+plot logminimax(4,x) title 'Minimax' with lines linestyle 1, \
+     logalphabeta(4,x) title 'Alpha-Beta' with lines linestyle 2, \
      second(x) notitle
 
-avg_bfactor = 35
 set output "chess-b=35.pdf"
-plot logminimax(x) title 'Minimax' with lines linestyle 1, \
-     logalphabeta(x) title 'Alpha-Beta' with lines linestyle 2, \
+plot logminimax(35,x) title 'Minimax' with lines linestyle 1, \
+     logalphabeta(35,x) title 'Alpha-Beta' with lines linestyle 2, \
      second(x) notitle
 
-avg_bfactor = 250
 set output "go-b=250.pdf"
-plot logminimax(x) title 'Minimax' with lines linestyle 1, \
-     logalphabeta(x) title 'Alpha-Beta' with lines linestyle 2, \
+plot logminimax(250,x) title 'Minimax' with lines linestyle 1, \
+     logalphabeta(250,x) title 'Alpha-Beta' with lines linestyle 2, \
+     second(x) notitle
+
+set output "all_in_one.pdf"
+plot logminimax(2,x) title 'Minimax 2' with lines linestyle 1, \
+     logalphabeta(2,x) title 'Alpha-Beta 2' with lines linestyle 2, \
+     logminimax(3,x) title 'Minimax 3' with lines linestyle 1, \
+     logalphabeta(3,x) title 'Alpha-Beta 3' with lines linestyle 2, \
+     logminimax(4,x) title 'Minimax 4' with lines linestyle 1, \
+     logalphabeta(4,x) title 'Alpha-Beta 4' with lines linestyle 2, \
+     logminimax(35,x) title 'Minimax Chess' with lines linestyle 1, \
+     logalphabeta(35,x) title 'Alpha-Beta Chess' with lines linestyle 2, \
+     logminimax(250,x) title 'Minimax Go' with lines linestyle 1, \
+     logalphabeta(250,x) title 'Alpha-Beta Go' with lines linestyle 2, \
      second(x) notitle
