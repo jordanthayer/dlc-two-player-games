@@ -137,21 +137,27 @@
 \end{slide}
 
 \begin{slide}{The Naive Approach}
-  %% Fix a trial budget
-  %% Sample evenly from the machines
-  %% Later pick the machine with the best payout with the rest of your cash
+  \begin{enumerate}
+    \item Fix a trial budget
+    \item Sample evenly from the machines
+    \item Later pick the machine with the best payout with the rest of your cash
+\end{enumerate}
 \end{slide}
 
 \begin{slide}{The Informal Model}
-  %% Given a budget
-  %% determine which arm is best to pull and pull it as often as possible
+  Given a budget, determine which arm is best to pull and pull it as often as
+  possible.\\ \pause
+  \vspace{0.2in} Pull levers that aren't the best payout as infrequently as
+  possible\\
+  \vspace{0.2in}\pause
+  But still be really sure that your notion of `best lever' is correct.
 \end{slide}
 
 \begin{slide}{The Formal Model}
-  We have a set of bandits, modled by a set of distributions $B = {R_1, ..., R_K}$.\\
-  Each distribution $R_i$ represents the $i$th bandit, and has mean payout $\mu_i$.\\
-  We have a horizon $H$ which represents the number of pulls available to us.\\
-  The regret after $T$ rounds is $\rho = T\mu^* - \sum_{t=1}^{T}r_t$ where:\\
+  We have a set of bandits, modled by a set of distributions $B = {R_1, ..., R_K}$.\\\pause
+  \vspace{0.2in}Each distribution $R_i$ represents the $i$th bandit, and has mean payout $\mu_i$.\\\pause
+  \vspace{0.2in}We have a horizon $H$ which represents the number of pulls available to us.\\\pause
+  \vspace{0.2in}The regret after $T$ rounds is $\rho = T\mu^* - \sum_{t=1}^{T}r_t$ where:\\
   $\mu^*$ is the mean payout of the best bandit, and $r_t$ is the reward earned
   from pull $t$.
 \end{slide}
