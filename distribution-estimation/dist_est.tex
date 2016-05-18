@@ -1,0 +1,138 @@
+\documentclass{powerdot}
+
+\pdsetup{lf={Jordan Thayer (Draper)},
+	 rf={15 Puzzle}}
+
+% for including postscript
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{latexsym} %%box def
+\usepackage{pstricks,,pst-node,pst-tree}
+\usepackage{amssymb}
+\DeclareMathOperator*{\argmin}{argmin}
+% get my macros
+
+% shorthand for including the figures
+\newcommand{\figwidth}[1]{%
+	\bc
+	\includegraphics[width=\textwidth]{#1}
+	\ec
+}
+\newcommand{\figheight}[1]{%
+	\bc
+	% height=2.8in
+	\includegraphics[height=2.8in]{#1}
+	\ec}
+
+\newcommand{\qspace}{\vspace{0.1in}}
+\newcommand{\myred}[1]{{\color{red} #1}}
+\newcommand{\mygreen}[1]{{\color{green} #1}}
+\newcommand{\myyellow}[1]{{\color{yellow} #1}}
+\newcommand{\turnred}[1]{{\onslide*{1}{#1}\onslide*{2}{\color{red} #1}}}
+\newcommand{\myblue}[1]{{\color{blue} #1}}
+
+\newcommand{\mybf}[1]{\textcolor{red}{\bf #1}}
+\newcommand{\myem}[1]{\textcolor{blue}{\em #1}}
+\newcommand{\openfH}{{\myit open}_{\widehat{f}}}
+\newcommand{\openf}{{\myit open}_f}
+
+
+\title{AI For Games: What Are We Talking About?}
+\author{Jordan Thayer}
+
+\date{\vspace{0.2in}}
+\begin{document}
+\maketitle
+
+\section[slide=false]{Logistics}
+\begin{slide}{Syllabus}
+  \begin{enumerate}
+    \item Introduction To Games
+      \subitem Syllabus
+      \subitem Types of Games
+      \subitem Terminology
+      \subitem Brief History of Games and AI
+    \item Minimax Tree Search
+    \item $\alpha$-$\beta$ pruning
+    \item Multi-Armed Bandits and Monte Carlo Tree Search
+    \item Implementing Monte Carlo Tree Search
+    \item Weak and Strong Solutions to Games, Checkers
+  \end{enumerate}
+\end{slide}
+
+\begin{slide}{Today\hfill Multi-Armed Bandits and Monte Carlo Tree Search}
+  \begin{itemize}
+    \item One Armed Bandits
+    \item Distribution Estimation
+    \item More than One Arm
+    \item Formalizing Regret
+    \item Transformation to Trees
+  \end{itemize}
+\end{slide}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Distribution Estimation}
+
+\begin{slide}{Bandit Games}
+  %% Picture of a 1-Armed Bandit
+\end{slide}
+
+\begin{slide}{Distribution Estimation}
+  %% Bandit picture
+  %% First payout
+  %% second payout
+  %% third payout, same as first
+  %% ...
+  %% Hey look it's a distribution!
+\end{slide}
+
+\begin{slide}{Formally}
+  Let's say we have a model of our distribution:\\
+  $ f(x | \mu, \sigma^2)= \frac{1}{\sigma \sqrt{2\pi}} e^{-
+    \frac{(x-\mu)^2}{2\sigma^2}}$\\
+  Further, we have a source of data:\\ %% Picture of the bandit
+
+  Now, we just need to divine $\mu$ and $\sigma$ by sampling from the data.\\ %% picture of lady playing slots
+
+  $\mu = \frac{1}{n} \sum_{i=1}^{n} payout_i$\\
+  $\sigma^2 = \frac{1}{n} \sum_{i=1}^{n} (payout_i - \mu)^2$
+\end{slide}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Multiple Arms, Regret}
+\begin{slide}{Going from 1 to n}
+  %% Show single machine
+  Before, we had a single machine.
+  %% show an actual casion row
+  But that isn't what's normal.
+  %% replicate charicature machine n times in a line
+  So, what's the real question?
+\end{slide}
+
+\begin{slide}{The Naive Approach}
+  %% Fix a trial budget
+  %% Sample evenly from the machines
+  %% Later pick the machine with the best payout with the rest of your cash
+\end{slide}
+
+\begin{slide}{The Informal Model}
+  %% Given a budget
+  %% determine which arm is best to pull and pull it as often as possible
+\end{slide}
+
+\begin{slide}{The Formal Model}
+  We have a set of bandits, modled by a set of distributions $B = {R_1, ..., R_K}$.\\
+  Each distribution $R_i$ represents the $i$th bandit, and has mean payout $\mu_i$.\\
+  We have a horizon $H$ which represents the number of pulls available to us.\\
+  The regret after $T$ rounds is $\ro = T\mu^* - \sum_{t=1}^{T}r_t$ where:\\
+  $\mu^*$ is the mean payout of the best bandit, and $r_t$ is the reward earned
+  from pull $t$.
+\end{slide}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Applied to Games}
+\begin{slide}{But I Don't Want To Play Slots}
+\end{slide}
+
+
+\end{document}
