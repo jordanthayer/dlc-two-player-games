@@ -74,16 +74,23 @@
 \section{Distribution Estimation}
 
 \begin{slide}{Bandit Games}
-  %% Picture of a 1-Armed Bandit
+
+  \includegraphics[width=3in]{images/one-armed-bandit.eps}
+
 \end{slide}
 
 \begin{slide}{Distribution Estimation}
-  %% Bandit picture
+  \onslide*{1}{\includegraphics[width=\textwidth]{images/one_bandit.eps}}
   %% First payout
+  \onslide*{2}{\includegraphics[width=\textwidth]{images/discret_dist_1.eps}}
   %% second payout
+  \onslide*{3}{\includegraphics[width=\textwidth]{images/discret_dist_2.eps}}
   %% third payout, same as first
+  \onslide*{4}{\includegraphics[width=\textwidth]{images/discret_dist_3.eps}}
   %% ...
   %% Hey look it's a distribution!
+  \onslide*{5}{\includegraphics[width=\textwidth]{images/discret_dist_end.eps}}
+  \onslide*{6}{\includegraphics[width=\textwidth]{images/discret_dist_as_dist.eps}}
 \end{slide}
 
 \begin{slide}{Formally}
@@ -102,11 +109,17 @@
 \section{Multiple Arms, Regret}
 \begin{slide}{Going from 1 to n}
   %% Show single machine
-  Before, we had a single machine.
+  \onslide*{1}{
+    Before, we had a single machine.\\
+    \includegraphics[width=3in]{images/one-armed-bandit.eps}
+  }
   %% show an actual casion row
-  But that isn't what's normal.
-  %% replicate charicature machine n times in a line
-  So, what's the real question?
+  \onslide*{2}{
+    But that isn't what's normal.
+    \includegraphics[width=3in]{images/Las_Vegas_slot_machines.eps}\\
+    %% replicate charicature machine n times in a line
+    So, what's the real question?
+  }
 \end{slide}
 
 \begin{slide}{The Naive Approach}
@@ -124,13 +137,14 @@
   We have a set of bandits, modled by a set of distributions $B = {R_1, ..., R_K}$.\\
   Each distribution $R_i$ represents the $i$th bandit, and has mean payout $\mu_i$.\\
   We have a horizon $H$ which represents the number of pulls available to us.\\
-  The regret after $T$ rounds is $\ro = T\mu^* - \sum_{t=1}^{T}r_t$ where:\\
+  The regret after $T$ rounds is $\rho = T\mu^* - \sum_{t=1}^{T}r_t$ where:\\
   $\mu^*$ is the mean payout of the best bandit, and $r_t$ is the reward earned
   from pull $t$.
 \end{slide}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Applied to Games}
+
 \begin{slide}{But I Don't Want To Play Slots}
 \end{slide}
 
