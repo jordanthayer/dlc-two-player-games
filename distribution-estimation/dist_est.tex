@@ -80,25 +80,39 @@
 \end{slide}
 
 \begin{slide}{Distribution Estimation}
-  \onslide*{1}{\includegraphics[width=\textwidth]{images/one_bandit.eps}}
+  \includegraphics[width=2in]{images/one_bandit.eps}
+\end{slide}
   %% First payout
-  \onslide*{2}{\includegraphics[width=\textwidth]{images/discret_dist_1.eps}}
+\begin{slide}[toc=]{Distribution Estimation}
+  \includegraphics[width=0.75in]{images/discret_dist_1.eps}
   %% second payout
-  \onslide*{3}{\includegraphics[width=\textwidth]{images/discret_dist_2.eps}}
+\end{slide}
+
+\begin{slide}[toc=]{Distribution Estimation}
+  \includegraphics[width=1in]{images/discret_dist_2.eps}
   %% third payout, same as first
-  \onslide*{4}{\includegraphics[width=\textwidth]{images/discret_dist_3.eps}}
+\end{slide}
+
+\begin{slide}[toc=]{Distribution Estimation}
+  \includegraphics[width=1in]{images/discret_dist_3.eps}
+\end{slide}
   %% ...
   %% Hey look it's a distribution!
-  \onslide*{5}{\includegraphics[width=\textwidth]{images/discret_dist_end.eps}}
-  \onslide*{6}{\includegraphics[width=\textwidth]{images/discret_dist_as_dist.eps}}
+\begin{slide}[toc=]{Distribution Estimation}
+  \includegraphics[width=2in]{images/discret_dist_end.eps}
+\end{slide}
+
+\begin{slide}[toc=]{Distribution Estimation}
+  \includegraphics[width=\textwidth]{images/discret_dist_as_dist.eps}
 \end{slide}
 
 \begin{slide}{Formally}
   Let's say we have a model of our distribution:\\
   $ f(x | \mu, \sigma^2)= \frac{1}{\sigma \sqrt{2\pi}} e^{-
-    \frac{(x-\mu)^2}{2\sigma^2}}$\\
+    \frac{(x-\mu)^2}{2\sigma^2}}$\\\pause
+  \vspace{0.2in}
   Further, we have a source of data:\\ %% Picture of the bandit
-
+  \begin{center}\includegraphics[height=0.5in]{images/one_bandit.eps}\end{center}\pause
   Now, we just need to divine $\mu$ and $\sigma$ by sampling from the data.\\ %% picture of lady playing slots
 
   $\mu = \frac{1}{n} \sum_{i=1}^{n} payout_i$\\
